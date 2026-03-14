@@ -21,6 +21,10 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.preprocessing import OneHotEncoder
 import joblib
 
+
+
+st.set_page_config(page_title="Suivi production", layout="wide")
+
 # INITIALISATION SECURISEE
 if 'hist_temp' not in st.session_state:
     st.session_state['hist_temp'] = np.random.uniform(22,26,45).tolist()

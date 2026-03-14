@@ -4,7 +4,7 @@ import torch
 from torchvision import models, transforms
 import os
 
-st.set_page_config(page_title="🫐 Vision Myrtilles", layout="wide")
+st.set_page_config(page_title="🫐 ComputerVision(Test avec des Myrtyrs)", layout="wide")
 
 # --- CSS design agricole ---
 st.markdown("""

@@ -3,7 +3,7 @@ from PIL import Image
 from ultralytics import YOLO
 import os
 
-st.set_page_config(page_title="🎯 Détection Pinot", layout="wide")
+st.set_page_config(page_title="🎯 Détection", layout="wide")
 
 # --- CSS design agricole ---
 st.markdown("""
@@ -14,7 +14,7 @@ div.stButton > button {background-color:#2E7D32; color:white; border-radius:8px;
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("<h2 style='text-align:center;'>🎯 Détection de Fruits (Pinot / YOLOv8)</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align:center;'>🎯 Détection Et décompte des récoltes (Test Pinot)</h2>", unsafe_allow_html=True)
 
 # --- Chargement modèle YOLOv8 ---
 @st.cache_resource
