@@ -34,11 +34,11 @@ if 'alertes' not in st.session_state:
 # Charger modèle RF
 @st.cache_resource
 def charger_model_rf():
-    df = pd.read_csv("App_Mobile_AgriMind/models/modele_maturation_agritech_final/modele_maturation_agritech_final.pkl")
+    df = pd.read_csv("App_Mobile_AgriMind/models/yield_df.csv")
     df['Area'] = df['Area'].str.strip()
     df['Item'] = df['Item'].str.strip()
     try:
-        model = joblib.load("App_Mobile_AgriMind/models/yield_df.csv")
+        model = joblib.load("App_Mobile_AgriMind/models/modele_maturation_agritech_final/modele_maturation_agritech_final.pkl")
     except:
         features = ['Area','Item','avg_temp','average_rain_fall_mm_per_year']
         target = 'hg/ha_yield'
