@@ -1,11 +1,7 @@
 streamlit
-pandas
-numpy<2.0
-joblib
-torch
-torchvision
-Pillow
-scikit-learn
 ultralytics
 opencv-python-headless
+numpy<2.0
+scikit-learn
+joblib
 dill
