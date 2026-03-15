@@ -41,7 +41,7 @@ def charger_ia_vision():
     )
 
     # Chemin absolu vers ton modèle
-    model_path = "C:/Users/Marco/Desktop/Hackaton/IA/prediction fruits/App_Mobile_AgriMind/models/blueberry_recognition_model.pth"
+    model_path = "App_Mobile_AgriMind/models/blueberry_recognition_model.pth"
     
     if os.path.exists(model_path):
         model.load_state_dict(torch.load(model_path, map_location="cpu"))

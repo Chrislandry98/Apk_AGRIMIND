@@ -34,7 +34,7 @@ if 'alertes' not in st.session_state:
 # Charger modèle RF
 @st.cache_resource
 def charger_model_rf():
-    df = pd.read_csv("C:/Users/Marco/Desktop/Hackaton/IA/prediction fruits/App_Mobile_AgriMind/models/data/yield_df.csv")
+    df = pd.read_csv("App_Mobile_AgriMind/models/modele_maturation_agritech_final/modele_maturation_agritech_final.pkl")
     df['Area'] = df['Area'].str.strip()
     df['Item'] = df['Item'].str.strip()
     try:
