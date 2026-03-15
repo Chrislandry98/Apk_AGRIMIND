@@ -38,7 +38,7 @@ def charger_model_rf():
     df['Area'] = df['Area'].str.strip()
     df['Item'] = df['Item'].str.strip()
     try:
-        model = joblib.load("C:/Users/Marco/Desktop/Hackaton/IA/prediction fruits/App_Mobile_AgriMind/models/modele_maturation_agritech_final.pkl")
+        model = joblib.load("App_Mobile_AgriMind/models/yield_df.csv")
     except:
         features = ['Area','Item','avg_temp','average_rain_fall_mm_per_year']
         target = 'hg/ha_yield'
