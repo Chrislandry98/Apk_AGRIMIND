@@ -20,7 +20,7 @@ st.markdown("<h2 style='text-align:center;'>🎯 Détection Et décompte des ré
 @st.cache_resource
 def charger_yolo():
     # Mets ici le chemin absolu de ton fichier best.pt
-    yolo_path = "App_Mobile_AgriMind/models/best.pt"
+    yolo_path = "models/best.pt"
     
     if os.path.exists(yolo_path):
         model = YOLO(yolo_path)

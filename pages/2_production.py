@@ -31,47 +31,38 @@ if 'hist_temp' not in st.session_state:
 if 'alertes' not in st.session_state:
     st.session_state['alertes'] = []
 
-# Charger modèle RF
+# CHARGEMENT DU MODÈLE (Version Robuste pour Streamlit Cloud)
 @st.cache_resource
 def charger_model_rf():
-    # Chemins relatifs pour Streamlit Cloud
-    # On suppose que le dossier 'models' est à la racine de ton GitHub
+    # Chemins relatifs adaptés à GitHub
     csv_path = "models/yield_df.csv"
-    model_path = "models/modele_maturation_agritech_final/modele_maturation_agritech_final.pkl"
     
-    # Lecture du CSV
     try:
         df = pd.read_csv(csv_path)
     except FileNotFoundError:
-        # Si ça échoue, on tente sans le dossier models (au cas où)
+        # Plan B si le dossier models n'est pas trouvé
         df = pd.read_csv("yield_df.csv")
         
     df['Area'] = df['Area'].str.strip()
     df['Item'] = df['Item'].str.strip()
 
-    try:
-        model = joblib.load(model_path)
-    except:
-        # Si le PKL est introuvable ou corrompu, on entraîne le modèle à la volée
-        features = ['Area','Item','avg_temp','average_rain_fall_mm_per_year']
-        target = 'hg/ha_yield'
-        
-        preprocessor = ColumnTransformer([
-            ('cat', OneHotEncoder(handle_unknown='ignore'), ['Area','Item'])
-        ], remainder='passthrough')
-        
-        model = Pipeline([
-            ('preprocessor', preprocessor), 
-            ('regressor', RandomForestRegressor(n_estimators=150, random_state=42))
-        ])
-        
-        model.fit(df[features], df[target])
-        # On ne peut souvent pas écrire sur le serveur Streamlit Cloud, 
-        # donc on évite le joblib.dump ici pour ne pas créer d'erreur
-        
+    # On entraîne le modèle directement pour éviter les conflits de version .pkl
+    features = ['Area', 'Item', 'avg_temp', 'average_rain_fall_mm_per_year']
+    target = 'hg/ha_yield'
+    
+    preprocessor = ColumnTransformer([
+        ('cat', OneHotEncoder(handle_unknown='ignore'), ['Area', 'Item'])
+    ], remainder='passthrough')
+    
+    model = Pipeline([
+        ('preprocessor', preprocessor), 
+        ('regressor', RandomForestRegressor(n_estimators=100, random_state=42, n_jobs=-1))
+    ])
+    
+    model.fit(df[features], df[target])
     return df, model
 
-# UN SEUL APPEL suffit pour récupérer les deux
+# Un seul appel pour toute la page
 df_yield, model_yield = charger_model_rf()
 
 # Config plantes
