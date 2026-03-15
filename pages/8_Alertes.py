@@ -19,13 +19,16 @@ if st.session_state['alertes']:
     
     # Fonction pour colorer les cellules de la colonne 'Type'
     def color_type_cell(val):
+    # On vérifie d'abord que val est bien du texte (string)
+        if not isinstance(val, str):
+            return ''  # Pas de couleur si ce n'est pas du texte
+            
         if "ROUGE" in val:
             return 'background-color:#FFB3B3'  # rouge clair
         elif "VIGILANCE" in val:
             return 'background-color:#FFF3CD'  # jaune clair
-        else:
-            return ''
-    
+        return ''  # Couleur par défaut (aucune)
+        
     # Appliquer cellule par cellule uniquement sur 'Type'
     styled = df_alertes.style.applymap(color_type_cell, subset=['Type'])
     
